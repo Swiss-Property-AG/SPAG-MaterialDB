@@ -51,7 +51,16 @@
         // Create table rows based on the content of each JSON file
         rowsData.forEach(file => {
           const row = document.createElement('tr');
-          Object.values(file.content).forEach(value => {
+
+          // Add link to the file in the first column
+          const fileNameCell = document.createElement('td');
+          const fileLink = document.createElement('a');
+          fileLink.href = `Materials/${file.filename}`;
+          fileLink.textContent = file.filename;
+          fileNameCell.appendChild(fileLink);
+          row.appendChild(fileNameCell);
+
+          Object.values(file.content).slice(1).forEach(value => {
             const cell = document.createElement('td');
             cell.textContent = value;
             row.appendChild(cell);
