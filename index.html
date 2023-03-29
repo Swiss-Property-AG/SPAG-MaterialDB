@@ -22,16 +22,16 @@
   </style>
 </head>
 <body>
-  <div class="header-container"> 
-  <img src="img/opensource_construction_logo.svg" alt="opensource.construction" width="150" height="auto" class="logo"> 
+  <div class="header-container">
+  <img src="img/opensource_construction_logo.svg" alt="opensource.construction" width="150" height="auto" class="logo">
   <h1>Open Materials Pilot (this is experimental)</h1>
   </div>
 
-<div class="search-container"> 
+<div class="search-container">
   <label for="searchBar">Search:</label>
   <input type="text" id="searchBar" placeholder="">
   <button id="searchButton"></button>
-</div> 
+</div>
 
   <table id="materialsTable">
     <thead>
@@ -106,24 +106,24 @@
         });
 
       const searchBar = document.getElementById('searchBar');
-      const searchButton = document.getElementById('searchButton');
 
-      searchButton.addEventListener('click', () => {
+      searchBar.addEventListener('input', () => {
+       
         const searchString = searchBar.value.toLowerCase().trim();
 
-        if (searchString === '') {
-          createTable(fileContents);
-        } else {
-          const filteredRows = fileContents.filter(file => {
-            return Object.values(file.content).some(value =>
-              value.toString().toLowerCase().includes(searchString)
-            );
-          });
+if (searchString === '') {
+  createTable(fileContents);
+} else {
+  const filteredRows = fileContents.filter(file => {
+    return Object.values(file.content).some(value =>
+      value.toString().toLowerCase().includes(searchString)
+    );
+  });
 
-          createTable(filteredRows);
-        }
-      });
-    });
-  </script>
+  createTable(filteredRows);
+}
+});
+});
+</script>
 </body>
 </html>
