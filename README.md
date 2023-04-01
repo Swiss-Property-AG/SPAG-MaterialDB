@@ -19,6 +19,8 @@ For example: https://github.com/Swiss-Property-AG/SPAG-MaterialDBmaterials/SPAG-
 
 run: python csv_to_json.py <input.csv> <output-folder> <name-reference>
 
+```console
 <mark>input.csv</mark> this is the uploaded csv containing the material data
 <mark>output-folder<m/ark> this is where you want the JSON files to be stored
 <mark>name-reference</mark> specify the colum name of your csv that you want to use for the file name
+```
