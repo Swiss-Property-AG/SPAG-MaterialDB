@@ -17,10 +17,14 @@ For example: https://github.com/Swiss-Property-AG/SPAG-MaterialDBmaterials/SPAG-
 
 3. Generate the JSON data for each entry, plus the index (for search) and the list of materials
 
-run: python csv_to_json.py <input.csv> <output-folder> <name-reference>
-
 ```console
+$python csv_to_json.py <input.csv> <output-folder> <name-reference>
+
+example
+
+$python csv_to_json input/SPAG_materialDB_draft.csv materials material_ID
+```
+
 input.csv: this is the uploaded csv containing the material data
 output-folder: this is where you want the JSON files to be stored
 name-reference: specify the colum name of your csv that you want to use for the file name
-```
