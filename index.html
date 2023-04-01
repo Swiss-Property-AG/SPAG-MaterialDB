@@ -1,121 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Files in Materials folder</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <title>Open Materials</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
   <header>
-    <div class="header-wrapper">
-      <div class="header-container">
-        <img src="img/opensource_construction_logo.svg" alt="opensource.construction" width="150" height="auto" class="logo">
-        <h1>Open Materials Pilot</h1>
-      </div>
-      <div class="search-container">
-        <label for="searchBar">Search:</label>
-        <input type="text" id="searchBar" placeholder="">
-        <button id="searchButton"></button>
-      </div>
+    <div class="logo left-logo">
+      <img src="img/swiss_property_logo.png" alt="Logo" class="logo">
+
     </div>
-  </header>
-  <table id="materialsTable">
-    <thead>
-      <tr>
-        <!-- The table header will be populated dynamically -->
-      </tr>
-    </thead>
-    <tbody>
-      <!-- The table body will be populated dynamically -->
-    </tbody>
-  </table>
+    <div class="text">
+      <h1>Open Material Data</h1>
+    </div>
+    <div class="logo right-logo">
+      <img src="img/opensource_construction_logo.svg" alt="Logo" class="logo">
+    </div>
+</header>
 
-  <script>
-    let fileContents = [];
-
-    function createTable(rowsData) {
-      const tableHead = document.querySelector('#materialsTable thead tr');
-      const tableBody = document.querySelector('#materialsTable tbody');
-
-      tableHead.innerHTML = '';
-      tableBody.innerHTML = '';
-
-      if (rowsData.length > 0) {
-        // Create table header based on the keys of the first JSON file
-        Object.keys(rowsData[0].content).forEach(key => {
-          const headerCell = document.createElement('th');
-          headerCell.textContent = key;
-          tableHead.appendChild(headerCell);
-        });
-
-        // Create table rows based on the content of each JSON file
-        rowsData.forEach(file => {
-          const row = document.createElement('tr');
-
-          // Add link to the file in the first column
-          const fileNameCell = document.createElement('td');
-          const fileLink = document.createElement('a');
-          fileLink.href = `Materials/${file.filename}`;
-          fileLink.textContent = file.filename;
-          fileNameCell.appendChild(fileLink);
-          row.appendChild(fileNameCell);
-
-          Object.values(file.content).slice(1).forEach(value => {
-            const cell = document.createElement('td');
-            cell.textContent = value;
-            row.appendChild(cell);
-          });
-          tableBody.appendChild(row);
-        });
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      fetch('files.json')
-        .then(response => response.json())
-        .then(files => {
-          fetch('file_contents.json')
-            .then(response => response.json())
-            .then(contents => {
-              fileContents = contents.map(file => {
-                return { filename: file.filename, content: JSON.parse(file.content) };
-              });
-
-              createTable(fileContents);
-            })
-            .catch(error => {
-              console.error('Error fetching file contents:', error);
-            });
-        })
-        .catch(error => {
-          console.error('Error fetching files:', error);
-        });
-
-      const searchBar = document.getElementById('searchBar');
-
-      searchBar.addEventListener('input', () => {
-       
-        const searchString = searchBar.value.toLowerCase().trim();
-
-if (searchString === '') {
-  createTable(fileContents);
-} else {
-  const filteredRows = fileContents.filter(file => {
-    return Object.values(file.content).some(value =>
-      value.toString().toLowerCase().includes(searchString)
-    );
-  });
-
-  createTable(filteredRows);
-}
-});
-});
-</script>
-
-<footer>
-  <p>No Copyright © 2023 by opensource.construction. No rights reserved.</p>
-</footer>
-
+    <main>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search...">
+            <button id="searchButton">🔍</button>
+        </div>
+        <table id="materialsTable">
+            <thead id="tableHead">
+            </thead>
+            <tbody id="tableBody">
+            </tbody>
+        </table>
+    </main>
+    <footer>
+        <p> Provided by Swiss Property AG and opensource.construction.</p>
+    </footer>
 </body>
 </html>
