@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Check if the property is 'material_name', create a link in this case
             if (key === 'material_name') {
                 const a = document.createElement('a');
-                a.href = `materials/${material.material_ID}.json`;
+                a.href = `product.html?file=${material.material_ID}`;
                 a.textContent = material[key];
                 td.appendChild(a);
             } else {
